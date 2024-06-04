@@ -2,7 +2,7 @@ const int PUMP_1 = 2;
 const int PUMP_2 = 3;
 const int PUMP_3 = 4;
 
-const int IS_DRY = 250;
+const int IS_DRY = 240;
 
 void setup() {
     pinMode(PUMP_1, OUTPUT);
@@ -23,11 +23,18 @@ void loop() {
 void toWater(int sensor, int pump) {
     int sensorReadings = analogRead(sensor);
 
-    Serial.println(sensorReadings);
+    log(sensor, sensorReadings);
 
     if (sensorReadings > IS_DRY) {
         digitalWrite(pump, LOW);
     } else {
         digitalWrite(pump, HIGH);
     }
+}
+
+void log(int sensor, int sensorReadings) {
+    Serial.print("Sensor ");
+    Serial.print(sensor);
+    Serial.print(": ");
+    Serial.println(sensorReadings);
 }
